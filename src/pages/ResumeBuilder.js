@@ -17,7 +17,7 @@ const INITIAL_FORM = {
 };
 
 export default function ResumeBuilder() {
-  const { user, saveResume, updateUser } = useApp();
+  const { user, saveResume } = useApp();
   const [form, setForm] = useState({
     ...INITIAL_FORM,
     name: user?.name || '',
@@ -30,7 +30,6 @@ export default function ResumeBuilder() {
   const [otp, setOtp] = useState('');
   const [showOTP, setShowOTP] = useState(false);
   const [photoPreview, setPhotoPreview] = useState(null);
-  const [resumeGenerated, setResumeGenerated] = useState(false);
 
   const isPremium = user?.plan === 'gold' || user?.plan === 'silver' || user?.plan === 'bronze';
 
@@ -65,7 +64,6 @@ export default function ResumeBuilder() {
     setTimeout(() => {
       const resumeData = { ...form, photoPreview };
       saveResume(resumeData);
-      setResumeGenerated(true);
       setStep('preview');
     }, 800);
     return true;
